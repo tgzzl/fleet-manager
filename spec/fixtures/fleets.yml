@@ -1,0 +1,26 @@
+fleet_1:
+  id: 1
+  name: 111
+  contact: 222
+  mobilephone: 15812341234
+  telephone: 1234
+  address: ryt
+  enabled: true
+
+fleet_2:
+  id: 2
+  name: 222
+  contact: 222
+  mobilephone: 18512345621
+  telephone: 1231
+  address: 深圳市
+  enabled: true
+
+fleet_3:
+  id: 3
+  name: aaa
+  contact: aaa
+  mobilephone: 12345678981
+  telephone: 456
+  address: 深圳市
+  enabled: false
