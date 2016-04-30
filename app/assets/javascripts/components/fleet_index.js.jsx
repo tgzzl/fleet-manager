@@ -47,22 +47,27 @@ var FleetIndex = React.createClass({
         <div className="form-inline" style={{marginBottom:'10px'}}>
           <div className="form-group form_search">
             <label className="sr-only">车队名称:</label>
-            <input type="text" className="form-control" placeholder="车队名称" ref="ref_search_fleet_name"/>
+            <input type="text" className="form-control" placeholder="车队名称" 
+                   id="fleet_form_name" ref="ref_search_fleet_name"/>
           </div>
           <div className="form-group form_search">
             <label className="sr-only">联系人:</label>
-            <input type="text" className="form-control" placeholder="联系人" ref="ref_search_fleet_contact"/>
+            <input type="text" className="form-control" placeholder="联系人"
+                   id="fleet_form_contact" ref="ref_search_fleet_contact"/>
           </div>
           <div className="form-group form_search">
             <label className="sr-only">手机/固话:</label>
-            <input type="text" className="form-control" placeholder="手机/固话" ref="ref_search_fleet_mobilephone"/>
+            <input type="text" className="form-control" placeholder="手机/固话"
+                   id="fleet_form_mobilephone" ref="ref_search_fleet_mobilephone"/>
           </div>
           <div className="form-group form_search">
             <label className="sr-only">车队驻地:</label>
-            <input type="text" className="form-control" placeholder="车队驻地" ref="ref_search_fleet_address"/>
+            <input type="text" className="form-control" placeholder="车队驻地"
+                   id="fleet_form_address" ref="ref_search_fleet_address"/>
           </div>
-          <button type="button" className="btn btn-default form_search" onClick={this.searchFleet}>搜索</button>
-          <a className="btn btn-primary" href="/fleets/new">新建车队</a>
+          <button type="button" className="btn btn-default form_search" onClick={this.searchFleet} 
+                  id="fleet_form_submit">搜索</button>
+          <a className="btn btn-primary" href="/fleets/new" id="link_fleet_new">新建车队</a>
         </div>
         <FleetList data={this.state.data} removeFleet={this.removeFleet}/>
       </div>
@@ -96,9 +101,10 @@ var FleetList = React.createClass({
             <td>{item.telephone}</td>
             <td>{item.address}</td>
             <td>
-              <a className="btn btn-default" href={'/fleets/'+item.id}>查看</a>
-              <a className="btn btn-default" href={'/fleets/'+item.id+'/edit'}>修改</a>
-              <button className="btn btn-default" onClick={this.props.removeFleet.bind(null,item.id)}>删除</button>
+              <a id={'link_fleet_show_'+item.id} className="btn btn-default" href={'/fleets/'+item.id}>查看</a>
+              <a id={'link_fleet_edit_'+item.id} className="btn btn-default" href={'/fleets/'+item.id+'/edit'}>修改</a>
+              <button id={'btn_fleet_delete_'+item.id} className="btn btn-default" 
+                      onClick={this.props.removeFleet.bind(null,item.id)}>删除</button>
             </td>
           </tr>
             );
