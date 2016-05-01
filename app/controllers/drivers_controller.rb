@@ -14,19 +14,13 @@ class DriversController < ApplicationController
   def edit
     driver = Driver.find_driver(params[:id])
 
-    respond_to do |format|
-      format.html { render 'edit', locals: {driver: driver} }
-      format.json { render json: driver }
-    end
+    render 'edit', locals: {driver: driver}
   end
 
   def show
     driver = Driver.find_driver(params[:id])
 
-    respond_to do |format|
-      format.html { render 'show', locals: {driver: driver} }
-      format.json { render json: driver }
-    end
+    render 'show', locals: {driver: driver}
   end
 
   def create

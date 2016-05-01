@@ -1,4 +1,7 @@
 class Driver < ActiveRecord::Base
+  has_many :vehicles
+  validates :name, presence: true
+  validates :mobilephone, presence: true, format: {with: /\A1\d{10}\z/, message: "请输入正确的手机号码"}
 
   def self.search(params)
     result = {return_code: 0, return_info: 'success'}
@@ -37,7 +40,7 @@ class Driver < ActiveRecord::Base
       driver = Driver.unscoped.find_by name: params["name"]
       # 存在标记不可用的对象，覆写重用此对象；不存在则新建一个；存在合法的对象，创建时报错
       params["enabled"] = true
-      (driver.present? and !driver.enabled) ? Driver.update(params) : driver = Driver.create!(params)
+      (driver.present? and !driver.enabled) ? Driver.update!(params) : driver = Driver.create!(params)
 
     rescue Exception => e
       puts e
@@ -53,7 +56,7 @@ class Driver < ActiveRecord::Base
 
     begin
       driver = Driver.find(id)
-      driver.update(params)
+      driver.update!(params)
     rescue Exception => e
       puts e
       result = {return_code: 1000, return_info: e.message}

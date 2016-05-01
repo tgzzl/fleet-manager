@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160430092341) do
+ActiveRecord::Schema.define(version: 20160501062405) do
 
   create_table "drivers", force: :cascade do |t|
     t.string   "name",                       null: false
@@ -33,5 +33,18 @@ ActiveRecord::Schema.define(version: 20160430092341) do
   end
 
   add_index "fleets", ["name"], name: "index_fleets_on_name", unique: true
+
+  create_table "vehicles", force: :cascade do |t|
+    t.string   "number",                    null: false
+    t.boolean  "enabled",    default: true, null: false
+    t.integer  "fleet_id"
+    t.integer  "driver_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "vehicles", ["driver_id"], name: "index_vehicles_on_driver_id"
+  add_index "vehicles", ["fleet_id"], name: "index_vehicles_on_fleet_id"
+  add_index "vehicles", ["number"], name: "index_vehicles_on_number", unique: true
 
 end

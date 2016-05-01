@@ -30,10 +30,11 @@ var FleetEdit = React.createClass({
   render: function () {
     return (
       <div className="panel-body">
-        <h2 className="text-center">编辑车队</h2>
-        <FleetForm data={this.state.fleet} setFleet={this.setFleet} saveFleet={this.saveFleet}/>
+        <Navigation title="编辑车队"/>
+        <div className="col-sm-11">
+          <FleetForm data={this.state.fleet} setFleet={this.setFleet} saveFleet={this.saveFleet}/>
+        </div>
       </div>
     );
   }
 });
-

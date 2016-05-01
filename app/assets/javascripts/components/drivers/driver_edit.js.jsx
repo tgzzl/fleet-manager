@@ -30,10 +30,11 @@ var DriverEdit = React.createClass({
   render: function () {
     return (
       <div className="panel-body">
-        <h2 className="text-center">编辑司机</h2>
-        <DriverForm data={this.state.driver} setDriver={this.setDriver} saveDriver={this.saveDriver}/>
+        <Navigation title="编辑司机"/>
+        <div className="col-sm-11">
+          <DriverForm data={this.state.driver} setDriver={this.setDriver} saveDriver={this.saveDriver}/>
+        </div>
       </div>
     );
   }
 });
-

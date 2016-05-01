@@ -83,4 +83,3 @@ var FleetForm = React.createClass({
     );
   }
 });
-

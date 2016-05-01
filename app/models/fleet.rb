@@ -1,4 +1,8 @@
 class Fleet < ActiveRecord::Base
+  has_many :vehicles
+  validates :name, presence: true, uniqueness: true
+  validates :contact, presence: true
+  validates :mobilephone, presence: true, format: {with: /\A1\d{10}\z/, message: "请输入正确的手机号码"}
 
   def self.search(params)
     result = {return_code: 0, return_info: 'success'}
@@ -39,7 +43,7 @@ class Fleet < ActiveRecord::Base
       fleet = Fleet.unscoped.find_by name: params["name"]
       # 存在标记不可用的对象，覆写重用此对象；不存在则新建一个；存在合法的对象，创建时报错
       params["enabled"] = true
-      (fleet.present? and !fleet.enabled) ? fleet.update(params) : fleet = Fleet.create!(params)
+      (fleet.present? and !fleet.enabled) ? fleet.update!(params) : fleet = Fleet.create!(params)
 
     rescue Exception => e
       puts e
@@ -55,7 +59,7 @@ class Fleet < ActiveRecord::Base
 
     begin
       fleet = Fleet.find(id)
-      fleet.update(params)
+      fleet.update!(params)
     rescue Exception => e
       puts e
       result = {return_code: 1000, return_info: e.message}

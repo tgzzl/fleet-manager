@@ -43,37 +43,35 @@ var FleetIndex = React.createClass({
   render: function () {
     return (
       <div className="app panel-body">
-        <h2 className="text-center">车队管理系统</h2>
-        <div className="form-inline" style={{marginBottom:'10px'}}>
-          <div className="form-group margin">
-            <label className="sr-only">车队名称:</label>
-            <input type="text" className="form-control" placeholder="车队名称"
-                   id="fleet_form_name" ref="ref_search_fleet_name"/>
+        <Navigation title="车队管理系统"/>
+        <div className="col-sm-11">
+          <div className="form-inline" style={{marginBottom:'10px'}}>
+            <div className="form-group margin">
+              <label className="sr-only">车队名称:</label>
+              <input type="text" className="form-control" placeholder="车队名称"
+                     id="fleet_form_name" ref="ref_search_fleet_name"/>
+            </div>
+            <div className="form-group margin">
+              <label className="sr-only">联系人:</label>
+              <input type="text" className="form-control" placeholder="联系人"
+                     id="fleet_form_contact" ref="ref_search_fleet_contact"/>
+            </div>
+            <div className="form-group margin">
+              <label className="sr-only">手机/固话:</label>
+              <input type="text" className="form-control" placeholder="手机/固话"
+                     id="fleet_form_mobilephone" ref="ref_search_fleet_mobilephone"/>
+            </div>
+            <div className="form-group margin">
+              <label className="sr-only">车队驻地:</label>
+              <input type="text" className="form-control" placeholder="车队驻地"
+                     id="fleet_form_address" ref="ref_search_fleet_address"/>
+            </div>
+            <button type="button" className="btn btn-default margin" onClick={this.searchFleet}
+                    id="fleet_form_submit">搜索
+            </button>
           </div>
-          <div className="form-group margin">
-            <label className="sr-only">联系人:</label>
-            <input type="text" className="form-control" placeholder="联系人"
-                   id="fleet_form_contact" ref="ref_search_fleet_contact"/>
-          </div>
-          <div className="form-group margin">
-            <label className="sr-only">手机/固话:</label>
-            <input type="text" className="form-control" placeholder="手机/固话"
-                   id="fleet_form_mobilephone" ref="ref_search_fleet_mobilephone"/>
-          </div>
-          <div className="form-group margin">
-            <label className="sr-only">车队驻地:</label>
-            <input type="text" className="form-control" placeholder="车队驻地"
-                   id="fleet_form_address" ref="ref_search_fleet_address"/>
-          </div>
-          <button type="button" className="btn btn-default margin" onClick={this.searchFleet}
-                  id="fleet_form_submit">搜索
-          </button>
-          <div style={{float:'right'}}>
-            <a className="btn btn-primary margin" href="/fleets/new" id="link_fleet_new">新建车队</a>
-            <a className="btn btn-primary" href="/drivers/" id="link_drivers">司机管理</a>
-          </div>
+          <FleetList data={this.state.data} deleteFleet={this.deleteFleet}/>
         </div>
-        <FleetList data={this.state.data} deleteFleet={this.deleteFleet}/>
       </div>
     );
   }
@@ -105,8 +103,10 @@ var FleetList = React.createClass({
               <td>{item.telephone}</td>
               <td>{item.address}</td>
               <td>
-                <a id={'link_fleet_show_'+item.id} className="btn btn-default" href={'/fleets/'+item.id}>查看</a>
-                <a id={'link_fleet_edit_'+item.id} className="btn btn-default" href={'/fleets/'+item.id+'/edit'}>修改</a>
+                <a id={'link_fleet_show_'+item.id} className="btn btn-default margin"
+                   href={'/fleets/'+item.id}>查看</a>
+                <a id={'link_fleet_edit_'+item.id} className="btn btn-default margin"
+                   href={'/fleets/'+item.id+'/edit'}>修改</a>
                 <button id={'btn_fleet_delete_'+item.id} className="btn btn-default"
                         onClick={this.props.deleteFleet.bind(null,item.id)}>删除
                 </button>
@@ -119,6 +119,3 @@ var FleetList = React.createClass({
     );
   }
 });
-
-
-

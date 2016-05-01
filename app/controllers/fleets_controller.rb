@@ -14,19 +14,13 @@ class FleetsController < ApplicationController
   def edit
     fleet = Fleet.find_fleet(params[:id])
 
-    respond_to do |format|
-      format.html { render 'edit', locals: {fleet: fleet} }
-      format.json { render json: fleet }
-    end
+    render 'edit', locals: {fleet: fleet}
   end
 
   def show
     fleet = Fleet.find_fleet(params[:id])
 
-    respond_to do |format|
-      format.html { render 'show', locals: {fleet: fleet} }
-      format.json { render json: fleet }
-    end
+    render 'show', locals: {fleet: fleet, vehicles: fleet.vehicles}
   end
 
   def create

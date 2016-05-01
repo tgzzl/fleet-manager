@@ -55,8 +55,8 @@ Rails.application.routes.draw do
   #   end
 
   resources :fleets
+  resources :vehicles
   resources :drivers
-
 
   root 'fleets#index'
 

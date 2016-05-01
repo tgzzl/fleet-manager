@@ -7,8 +7,5 @@ class CreateDrivers < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
-    add_index(:drivers, :name, unique: true)
-
   end
 end
