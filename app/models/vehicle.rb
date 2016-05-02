@@ -8,8 +8,8 @@ class Vehicle < ActiveRecord::Base
     result = {return_code: 0, return_info: 'success'}
 
     begin
-      #vehicles = Vehicle.all
-      vehicles = Vehicle.where("enabled = ?", true)
+      vehicles = Vehicle.all
+      #vehicles = Vehicle.where("enabled = ?", true)
       vehicles = vehicles.where("number like ?", "%#{params["number"]}%") if params["number"].present?
 
       result2 = []
@@ -42,11 +42,15 @@ class Vehicle < ActiveRecord::Base
     result = {return_code: 0, return_info: 'success'}
 
     begin
-      params[:number] = params[:number].upcase
+      params["enabled"] = true
+
+      vehicle = Vehicle.unscoped.find_by number: params["number"]
+      # 存在标记不可用的对象，覆写重用此对象；不存在则新建一个；存在合法的对象，创建时报错
+      (vehicle.present? and !vehicle.enabled) ? vehicle.update!(params) : vehicle = Vehicle.create!(params)
 
       fleet = Fleet.find(fleet_id)
       driver = Driver.find(driver_id)
-      vehicle = fleet.vehicles.create!(params)
+      fleet.vehicles << vehicle
       driver.vehicles << vehicle
 
     rescue Exception => e
@@ -62,8 +66,6 @@ class Vehicle < ActiveRecord::Base
     result = {return_code: 0, return_info: 'success'}
 
     begin
-      params[:number] = params[:number].upcase
-
       vehicle = Vehicle.find(id)
       vehicle.fleet = Fleet.find(fleet_id)
       vehicle.driver = Driver.find(driver_id)

@@ -43,6 +43,7 @@ class VehiclesController < ApplicationController
   end
 
   def filter_params
+    params['vehicle']['number'] = params['vehicle']['number'].upcase
     params.require(:vehicle).permit(:number)
   end
 end

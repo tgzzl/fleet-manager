@@ -103,4 +103,31 @@ RSpec.describe Fleet, type: :model do
     end
   end
 
+  describe "test the find function" do
+
+    it "find fleet" do
+      params = test_params
+      result = Fleet.create_fleet(params)
+      fleet = Fleet.find_fleet(result[:fleet].id)
+
+      expect(result[:fleet].name).to eq fleet.name
+    end
+
+  end
+
+  describe "test the destroy function" do
+
+    it "destroy fleet" do
+      params = test_params
+      result = Fleet.create_fleet(params)
+      id = result[:fleet].id
+      Fleet.destroy_fleet(id)
+      fleet = Fleet.find_fleet(id)
+
+      expect(fleet.name).to eq params["name"]
+      expect(fleet.enabled).to eq false
+    end
+
+  end
+
 end

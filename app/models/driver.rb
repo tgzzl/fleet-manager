@@ -37,10 +37,8 @@ class Driver < ActiveRecord::Base
     result = {return_code: 0, return_info: 'success'}
 
     begin
-      driver = Driver.unscoped.find_by name: params["name"]
-      # 存在标记不可用的对象，覆写重用此对象；不存在则新建一个；存在合法的对象，创建时报错
       params["enabled"] = true
-      (driver.present? and !driver.enabled) ? Driver.update!(params) : driver = Driver.create!(params)
+      driver = Driver.create!(params)
 
     rescue Exception => e
       puts e
