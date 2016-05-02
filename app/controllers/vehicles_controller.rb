@@ -27,7 +27,7 @@ class VehiclesController < ApplicationController
   def show
     vehicle = Vehicle.find_vehicle(params[:id])
 
-    render 'show', locals: {vehicle: vehicle, fleet: vehicle.fleet, driver: vehicle.driver}
+    render 'show', locals: {vehicle: vehicle, fleet: Vehicle.get_fleet(vehicle), driver: Vehicle.get_driver(vehicle)}
   end
 
   def create

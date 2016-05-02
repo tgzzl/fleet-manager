@@ -20,7 +20,7 @@ class FleetsController < ApplicationController
   def show
     fleet = Fleet.find_fleet(params[:id])
 
-    render 'show', locals: {fleet: fleet, vehicles: fleet.vehicles}
+    render 'show', locals: {fleet: fleet, vehicles: Fleet.get_vehicles(fleet)}
   end
 
   def create

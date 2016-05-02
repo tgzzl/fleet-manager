@@ -8,8 +8,8 @@ class Vehicle < ActiveRecord::Base
     result = {return_code: 0, return_info: 'success'}
 
     begin
-      vehicles = Vehicle.all
-      #vehicles = Vehicle.where("enabled = ?", true)
+      #vehicles = Vehicle.all
+      vehicles = Vehicle.where("enabled = ?", true)
       vehicles = vehicles.where("number like ?", "%#{params["number"]}%") if params["number"].present?
 
       result2 = []
@@ -36,6 +36,16 @@ class Vehicle < ActiveRecord::Base
     end
 
     vehicle
+  end
+
+  def self.get_fleet(vehicle)
+    fleet = vehicle.fleet
+    fleet
+  end
+
+  def self.get_driver(vehicle)
+    driver = vehicle.driver
+    driver
   end
 
   def self.create_vehicle(fleet_id, driver_id, params)

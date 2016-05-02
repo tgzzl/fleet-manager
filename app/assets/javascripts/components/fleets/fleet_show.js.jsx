@@ -34,9 +34,9 @@ var FleetVehicleList = React.createClass({
           return (
             <tr key={i}>
               <th scope="row">{i + 1}</th>
-              <td>{item.number}</td>
-              <td>{item.number}</td>
-              <td>{item.number}</td>
+              <td>{item.vehicle.number}</td>
+              <td>{item.driver.name}</td>
+              <td>{item.driver.mobilephone}</td>
               <td>
                 <a id={'link_vehicle_show_'+item.id} className="btn btn-default margin"
                    href={'/vehicles/'+item.id}>查看</a>
