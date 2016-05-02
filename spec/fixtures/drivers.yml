@@ -1,0 +1,17 @@
+driver_1:
+  id: 1
+  name: 司机1
+  mobilephone: 15812341234
+  enabled: true
+
+driver_2:
+  id: 2
+  name: 司机2
+  mobilephone: 18512341234
+  enabled: true
+
+driver_3:
+  id: 3
+  name: 司机false
+  mobilephone: 15812341234
+  enabled: false

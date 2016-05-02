@@ -1,0 +1,20 @@
+vehicle_1:
+  id: 1
+  number: 粤B88888
+  fleet_id: 1
+  driver_id: 1
+  enabled: true
+
+vehicle_2:
+  id: 2
+  number: 粤B11111
+  fleet_id: 2
+  driver_id: 2
+  enabled: true
+
+vehicle_3:
+  id: 3
+  number: 粤BXXXXX
+  fleet_id: 1
+  driver_id: 1
+  enabled: false
