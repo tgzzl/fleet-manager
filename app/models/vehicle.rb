@@ -9,8 +9,20 @@ class Vehicle < ActiveRecord::Base
 
     begin
       #vehicles = Vehicle.all
-      vehicles = Vehicle.where("enabled = ?", true)
-      vehicles = vehicles.where("number like ?", "%#{params["number"]}%") if params["number"].present?
+      vehicles = Vehicle.where("vehicles.enabled = ?", true)
+      vehicles = vehicles.where("vehicles.number like ?", "%#{params["number"]}%") if params["number"].present?
+
+      if params["fleet_name"].present? or params["fleet_contact"].present?
+        vehicles = vehicles.joins("JOIN fleets ON fleets.id = vehicles.fleet_id")
+        vehicles = vehicles.where("fleets.name like ?", "%#{params["fleet_name"]}%") if params["fleet_name"].present?
+        vehicles = vehicles.where("fleets.contact like ?", "%#{params["fleet_contact"]}%") if params["fleet_contact"].present?
+      end
+
+      if params["driver_name"].present? or params["driver_mobilephone"].present?
+        vehicles = vehicles.joins("JOIN drivers ON drivers.id = vehicles.driver_id")
+        vehicles = vehicles.where("drivers.name like ?", "%#{params["driver_name"]}%") if params["driver_name"].present?
+        vehicles = vehicles.where("drivers.mobilephone like ?", "%#{params["driver_mobilephone"]}%") if params["driver_mobilephone"].present?
+      end
 
       result[:vehicles] = Vehicle.as_json(vehicles)
 

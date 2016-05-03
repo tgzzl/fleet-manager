@@ -25,6 +25,7 @@ var VehicleIndex = React.createClass({
       fleet_name: this.refs.ref_search_fleet_name.value,
       fleet_contact: this.refs.ref_search_fleet_contact.value,
       driver_name: this.refs.ref_search_driver_name.value,
+      driver_mobilephone: this.refs.ref_search_driver_mobilephone.value,
     };
     console.log('Search vehicle:', param);
     $.ajax({
@@ -66,6 +67,11 @@ var VehicleIndex = React.createClass({
               <input type="text" className="form-control" placeholder="司机姓名"
                      id="vehicle_form_driver_name" ref="ref_search_driver_name"/>
             </div>
+            <div className="form-group margin">
+              <label className="sr-only">司机手机:</label>
+              <input type="text" className="form-control" placeholder="司机手机"
+                     id="vehicle_form_driver_mobilephone" ref="ref_search_driver_mobilephone"/>
+            </div>
             <button type="button" className="btn btn-default margin" onClick={this.searchVehicle}
                     id="vehicle_form_submit">搜索
             </button>
@@ -88,6 +94,7 @@ var VehicleList = React.createClass({
           <th>车队名称</th>
           <th>车队联系人</th>
           <th>司机姓名</th>
+          <th>司机手机</th>
           <th>操作</th>
         </tr>
         </thead>
@@ -100,6 +107,7 @@ var VehicleList = React.createClass({
             <td>{item.fleet.name}</td>
             <td>{item.fleet.contact}</td>
             <td>{item.driver.name}</td>
+            <td>{item.driver.mobilephone}</td>
             <td>
               <a id={'link_vehicle_show_'+item.id} className="btn btn-default margin"
                  href={'/vehicles/'+item.id}>查看</a>
