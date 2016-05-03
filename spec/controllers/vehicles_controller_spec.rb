@@ -111,7 +111,9 @@ RSpec.describe VehiclesController, type: :controller do
 
   describe "test get #show" do
     it "get vehicle and render template show" do
-      get :show, test_params
+      params = test_params
+      post :create, params
+      get :show, params
       expect(response.status).to eq 200
       expect(response).to render_template :show
     end

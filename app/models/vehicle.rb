@@ -12,12 +12,7 @@ class Vehicle < ActiveRecord::Base
       vehicles = Vehicle.where("enabled = ?", true)
       vehicles = vehicles.where("number like ?", "%#{params["number"]}%") if params["number"].present?
 
-      result2 = []
-      vehicles.each do |item|
-        result2.push({vehicle: item, fleet: item.fleet, driver: item.driver})
-      end
-
-      result[:vehicles] = result2
+      result[:vehicles] = Vehicle.as_json(vehicles)
 
     rescue Exception => e
       puts e
@@ -36,16 +31,6 @@ class Vehicle < ActiveRecord::Base
     end
 
     vehicle
-  end
-
-  def self.get_fleet(vehicle)
-    fleet = vehicle.fleet
-    fleet
-  end
-
-  def self.get_driver(vehicle)
-    driver = vehicle.driver
-    driver
   end
 
   def self.create_vehicle(fleet_id, driver_id, params)
@@ -101,4 +86,7 @@ class Vehicle < ActiveRecord::Base
     result[:vehicles]
   end
 
+  def self.as_json(obj)
+    obj.as_json(include: {fleet: {}, driver: {}})
+  end
 end

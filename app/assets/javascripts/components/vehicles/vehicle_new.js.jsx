@@ -11,7 +11,7 @@ var VehicleNew = React.createClass({
       method: 'POST',
       data: {
         fleet_id: this.state.vehicle.fleet_id,
-        driver_id: this.state.vehicle.fleet_id,
+        driver_id: this.state.vehicle.driver_id,
         vehicle: this.state.vehicle
       },
       success: function (data) {

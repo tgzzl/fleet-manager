@@ -32,20 +32,19 @@ var FleetVehicleList = React.createClass({
         <tbody>
         {this.props.data.map(function (item, i) {
           return (
-            <tr key={i}>
-              <th scope="row">{i + 1}</th>
-              <td>{item.vehicle.number}</td>
-              <td>{item.driver.name}</td>
-              <td>{item.driver.mobilephone}</td>
-              <td>
-                <a id={'link_vehicle_show_'+item.id} className="btn btn-default margin"
-                   href={'/vehicles/'+item.id}>查看</a>
-                <a id={'link_vehicle_edit_'+item.id} className="btn btn-default"
-                   href={'/vehicles/'+item.id+'/edit'}>修改</a>
-              </td>
-            </tr>
-          );
-        }, this)}
+          <tr key={i}>
+            <th scope="row">{i + 1}</th>
+            <td>{item.number}</td>
+            <td>{item.driver.name}</td>
+            <td>{item.driver.mobilephone}</td>
+            <td>
+              <a id={'link_vehicle_show_'+item.id} className="btn btn-default margin"
+                 href={'/vehicles/'+item.id}>查看</a>
+              <a id={'link_vehicle_edit_'+item.id} className="btn btn-default"
+                 href={'/vehicles/'+item.id+'/edit'}>修改</a>
+            </td>
+          </tr>
+            )}, this)}
         </tbody>
       </table>
     );

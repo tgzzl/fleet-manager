@@ -1,9 +1,4 @@
 var VehicleIndex = React.createClass({
-  getInitialState: function () {
-    return {
-      data: this.props.data || [],
-    }
-  },
   deleteVehicle: function (fleetId, vehicleId) {
     console.log('Destroy vehicle:', fleetId, vehicleId);
     $.ajax({
@@ -70,7 +65,7 @@ var VehicleIndex = React.createClass({
                     id="vehicle_form_submit">搜索
             </button>
           </div>
-          <VehicleList data={this.state.data} deleteVehicle={this.deleteVehicle}/>
+          <VehicleList data={this.props.vehicles} deleteVehicle={this.deleteVehicle}/>
         </div>
       </div>
     );
@@ -94,24 +89,23 @@ var VehicleList = React.createClass({
         <tbody>
         {this.props.data.map(function (item, i) {
           return (
-            <tr key={i}>
-              <th scope="row">{i + 1}</th>
-              <td>{item.vehicle.number}</td>
-              <td>{item.fleet.name}</td>
-              <td>{item.fleet.contact}</td>
-              <td>{item.driver.name}</td>
-              <td>
-                <a id={'link_vehicle_show_'+item.vehicle.id} className="btn btn-default margin"
-                   href={'/vehicles/'+item.vehicle.id}>查看</a>
-                <a id={'link_vehicle_edit_'+item.vehicle.id} className="btn btn-default margin"
-                   href={'/vehicles/'+item.vehicle.id+'/edit'}>修改</a>
-                <button id={'btn_vehicle_delete_'+item.vehicle.id} className="btn btn-default"
-                        onClick={this.props.deleteVehicle.bind(null,item.fleet.id,item.vehicle.id)}>删除
-                </button>
-              </td>
-            </tr>
-          );
-        }, this)}
+          <tr key={i}>
+            <th scope="row">{i + 1}</th>
+            <td>{item.number}</td>
+            <td>{item.fleet.name}</td>
+            <td>{item.fleet.contact}</td>
+            <td>{item.driver.name}</td>
+            <td>
+              <a id={'link_vehicle_show_'+item.id} className="btn btn-default margin"
+                 href={'/vehicles/'+item.id}>查看</a>
+              <a id={'link_vehicle_edit_'+item.id} className="btn btn-default margin"
+                 href={'/vehicles/'+item.id+'/edit'}>修改</a>
+              <button id={'btn_vehicle_delete_'+item.id} className="btn btn-default"
+                      onClick={this.props.deleteVehicle.bind(null,item.fleet.id,item.id)}>删除
+              </button>
+            </td>
+          </tr>
+            )}, this)}
         </tbody>
       </table>
     );

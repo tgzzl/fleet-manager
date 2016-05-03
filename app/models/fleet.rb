@@ -36,20 +36,6 @@ class Fleet < ActiveRecord::Base
     fleet
   end
 
-  def self.get_vehicles(fleet)
-    rtn = []
-    begin
-      vehicles = fleet.vehicles
-      vehicles.each do |item|
-        rtn.push({vehicle: item, driver: item.driver})
-      end
-    rescue Exception => e
-      puts e
-    end
-
-    rtn
-  end
-
   def self.create_fleet(params)
     result = {return_code: 0, return_info: 'success'}
 

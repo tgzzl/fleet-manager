@@ -1,9 +1,4 @@
 var FleetIndex = React.createClass({
-  getInitialState: function () {
-    return {
-      data: this.props.data || [],
-    }
-  },
   deleteFleet: function (id) {
     console.log('Destroy fleet:', id);
     $.ajax({
@@ -70,7 +65,7 @@ var FleetIndex = React.createClass({
                     id="fleet_form_submit">搜索
             </button>
           </div>
-          <FleetList data={this.state.data} deleteFleet={this.deleteFleet}/>
+          <FleetList data={this.props.fleets} deleteFleet={this.deleteFleet}/>
         </div>
       </div>
     );
@@ -95,25 +90,25 @@ var FleetList = React.createClass({
         <tbody>
         {this.props.data.map(function (item, i) {
           return (
-            <tr key={i}>
-              <th scope="row">{i + 1}</th>
-              <td>{item.name}</td>
-              <td>{item.contact}</td>
-              <td>{item.mobilephone}</td>
-              <td>{item.telephone}</td>
-              <td>{item.address}</td>
-              <td>
-                <a id={'link_fleet_show_'+item.id} className="btn btn-default margin"
-                   href={'/fleets/'+item.id}>查看</a>
-                <a id={'link_fleet_edit_'+item.id} className="btn btn-default margin"
-                   href={'/fleets/'+item.id+'/edit'}>修改</a>
-                <button id={'btn_fleet_delete_'+item.id} className="btn btn-default"
-                        onClick={this.props.deleteFleet.bind(null,item.id)}>删除
-                </button>
-              </td>
-            </tr>
-          );
-        }, this)}
+          <tr key={i}>
+            <th scope="row">{i + 1}</th>
+            <td>{item.name}</td>
+            <td>{item.contact}</td>
+            <td>{item.mobilephone}</td>
+            <td>{item.telephone}</td>
+            <td>{item.address}</td>
+            <td>
+              <a id={'link_fleet_show_'+item.id} className="btn btn-default margin"
+                 href={'/fleets/'+item.id}>查看</a>
+              <a id={'link_fleet_edit_'+item.id} className="btn btn-default margin"
+                 href={'/fleets/'+item.id+'/edit'}>修改</a>
+              <button id={'btn_fleet_delete_'+item.id} className="btn btn-default"
+                      onClick={this.props.deleteFleet.bind(null,item.id)}>删除
+              </button>
+            </td>
+          </tr>
+            );
+          }, this)}
         </tbody>
       </table>
     );

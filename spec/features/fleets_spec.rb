@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'selenium/webdriver'
+Selenium::WebDriver::Firefox::Binary.path='C:\Users\tanner.tan\AppData\Local\Mozilla Firefox\firefox.exe'
 
 feature "fleets page", :type => :feature, js: true do
 

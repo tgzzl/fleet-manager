@@ -1,8 +1,8 @@
 var FleetEdit = React.createClass({
   getInitialState: function () {
     return {
-      id: this.props.data.id,
-      fleet: this.props.data,
+      id: this.props.fleet.id,
+      fleet: this.props.fleet,
     }
   },
   saveFleet: function () {

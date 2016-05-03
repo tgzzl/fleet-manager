@@ -13,7 +13,7 @@ var VehicleEdit = React.createClass({
       data: {
         id: this.state.id,
         fleet_id: this.state.vehicle.fleet_id,
-        driver_id: this.state.vehicle.fleet_id,
+        driver_id: this.state.vehicle.driver_id,
         vehicle: this.state.vehicle
       },
       success: function (data) {
