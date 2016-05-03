@@ -84,6 +84,8 @@ RSpec.describe DriversController, type: :controller do
 
   describe "test get #show" do
     it "get driver and render template show" do
+      params = test_params
+      post :create, params
       get :show, test_params
       expect(response.status).to eq 200
       expect(response).to render_template :show
