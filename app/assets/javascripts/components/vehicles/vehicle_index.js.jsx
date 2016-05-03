@@ -1,4 +1,9 @@
 var VehicleIndex = React.createClass({
+  getInitialState: function () {
+    return {
+      vehicles: this.props.vehicles || [],
+    }
+  },
   deleteVehicle: function (fleetId, vehicleId) {
     console.log('Destroy vehicle:', fleetId, vehicleId);
     $.ajax({
@@ -6,8 +11,8 @@ var VehicleIndex = React.createClass({
       method: 'DELETE',
       dataType: 'JSON',
       data: {id: vehicleId},
-      success: function (data) {
-        this.setState({data: data});
+      success: function (vehicles) {
+        this.setState({vehicles: vehicles});
       }.bind(this),
       error: function (xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -27,8 +32,8 @@ var VehicleIndex = React.createClass({
       method: 'GET',
       dataType: 'JSON',
       data: param,
-      success: function (data) {
-        this.setState({data: data});
+      success: function (vehicles) {
+        this.setState({vehicles: vehicles});
       }.bind(this),
       error: function (xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -65,7 +70,7 @@ var VehicleIndex = React.createClass({
                     id="vehicle_form_submit">搜索
             </button>
           </div>
-          <VehicleList data={this.props.vehicles} deleteVehicle={this.deleteVehicle}/>
+          <VehicleList data={this.state.vehicles} deleteVehicle={this.deleteVehicle}/>
         </div>
       </div>
     );

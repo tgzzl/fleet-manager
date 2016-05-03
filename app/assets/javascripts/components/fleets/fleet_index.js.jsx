@@ -1,13 +1,17 @@
 var FleetIndex = React.createClass({
-  deleteFleet: function (id) {
+  getInitialState: function () {
+    return {
+      fleets: this.props.fleets || [],
+    }
+  }, deleteFleet: function (id) {
     console.log('Destroy fleet:', id);
     $.ajax({
       url: '/fleets/' + id,
       method: 'DELETE',
       dataType: 'JSON',
       data: {id: id},
-      success: function (data) {
-        this.setState({data: data});
+      success: function (fleets) {
+        this.setState({fleets: fleets});
       }.bind(this),
       error: function (xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -27,8 +31,8 @@ var FleetIndex = React.createClass({
       method: 'GET',
       dataType: 'JSON',
       data: param,
-      success: function (data) {
-        this.setState({data: data});
+      success: function (fleets) {
+        this.setState({fleets: fleets});
       }.bind(this),
       error: function (xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -65,7 +69,7 @@ var FleetIndex = React.createClass({
                     id="fleet_form_submit">搜索
             </button>
           </div>
-          <FleetList data={this.props.fleets} deleteFleet={this.deleteFleet}/>
+          <FleetList data={this.state.fleets} deleteFleet={this.deleteFleet}/>
         </div>
       </div>
     );

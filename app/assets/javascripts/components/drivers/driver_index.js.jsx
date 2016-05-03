@@ -1,4 +1,9 @@
 var DriverIndex = React.createClass({
+  getInitialState: function () {
+    return {
+      drivers: this.props.drivers || [],
+    }
+  },
   deleteDriver: function (id) {
     console.log('Destroy driver:', id);
     $.ajax({
@@ -6,8 +11,8 @@ var DriverIndex = React.createClass({
       method: 'DELETE',
       dataType: 'JSON',
       data: {id: id},
-      success: function (data) {
-        this.setState({data: data});
+      success: function (drivers) {
+        this.setState({drivers: drivers});
       }.bind(this),
       error: function (xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -25,8 +30,8 @@ var DriverIndex = React.createClass({
       method: 'GET',
       dataType: 'JSON',
       data: param,
-      success: function (data) {
-        this.setState({data: data});
+      success: function (drivers) {
+        this.setState({drivers: drivers});
       }.bind(this),
       error: function (xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -53,7 +58,7 @@ var DriverIndex = React.createClass({
                     id="driver_form_submit">搜索
             </button>
           </div>
-          <DriverList data={this.props.drivers} deleteDriver={this.deleteDriver}/>
+          <DriverList data={this.state.drivers} deleteDriver={this.deleteDriver}/>
         </div>
       </div>
     );
