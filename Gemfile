@@ -1,5 +1,5 @@
-# source 'http://gems.sz.optilink.local:8808/'
-source 'https://ruby.taobao.org/'
+source 'http://gems.sz.optilink.local:8808/'
+#source 'https://ruby.taobao.org/'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -51,7 +51,6 @@ group :development, :test do
   gem 'poltergeist', '1.6.0'
   gem 'phantomjs', '1.9.8.0', :require => 'phantomjs/poltergeist'
   gem 'database_cleaner', '1.4.1'
-  gem 'selenium-webdriver'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

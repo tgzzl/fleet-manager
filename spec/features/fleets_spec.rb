@@ -1,6 +1,4 @@
 require 'rails_helper'
-require 'selenium/webdriver'
-Selenium::WebDriver::Firefox::Binary.path='C:\Users\tanner.tan\AppData\Local\Mozilla Firefox\firefox.exe'
 
 feature "fleets page", :type => :feature, js: true do
 
@@ -11,7 +9,7 @@ feature "fleets page", :type => :feature, js: true do
 
     fill_in "fleet_form_name", :with => "111"
     fill_in "fleet_form_contact", :with => "111"
-    fill_in "fleet_form_mobilephone", :with => "1581234"
+    fill_in "fleet_form_mobilephone", :with => "158"
     fill_in "fleet_form_address", :with => "深圳"
     click_button "fleet_form_submit"
     expect(current_url.end_with?('/fleets')).to eq true
