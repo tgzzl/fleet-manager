@@ -3,24 +3,24 @@ class FleetsController < ApplicationController
     result = Fleet.search(params)
 
     respond_to do |format|
-      format.html { render 'index', locals: {fleets: result[:fleets]} }
+      format.html { render_router result[:fleets] }
       format.json { render json: result[:fleets] }
     end
   end
 
   def new
+    render_router
   end
 
   def edit
     fleet = Fleet.find_fleet(params[:id])
-
-    render 'edit', locals: {fleet: fleet}
+    render_router fleet
   end
 
   def show
     fleet = Fleet.find_fleet(params[:id])
-
-    render 'show', locals: {fleet: fleet, vehicles: Vehicle.as_json(fleet.vehicles)}
+    data = {fleet: fleet, vehicles: Vehicle.as_json(fleet.vehicles)}
+    render_router data
   end
 
   def create

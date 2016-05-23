@@ -4,12 +4,12 @@ var FleetShow = React.createClass({
       <div className="panel-body">
         <Navigation title="车队详情"/>
         <div className="col-sm-11">
-          <p>名称：{this.props.fleet.name}</p>
-          <p>联系人：{this.props.fleet.contact}</p>
-          <p>手机：{this.props.fleet.mobilephone}</p>
-          <p>电话：{this.props.fleet.telephone}</p>
-          <p>车队驻地：{this.props.fleet.address}</p>
-          <FleetVehicleList data={this.props.vehicles}/>
+          <p>名称：{this.props.data.fleet.name}</p>
+          <p>联系人：{this.props.data.fleet.contact}</p>
+          <p>手机：{this.props.data.fleet.mobilephone}</p>
+          <p>电话：{this.props.data.fleet.telephone}</p>
+          <p>车队驻地：{this.props.data.fleet.address}</p>
+          <FleetVehicleList data={this.props.data.vehicles}/>
         </div>
       </div>
     );

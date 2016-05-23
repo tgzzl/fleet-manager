@@ -3,24 +3,23 @@ class DriversController < ApplicationController
     result = Driver.search(params)
 
     respond_to do |format|
-      format.html { render 'index', locals: {drivers: result[:drivers]} }
+      format.html { render_router result[:drivers] }
       format.json { render json: result[:drivers] }
     end
   end
 
   def new
+    render_router
   end
 
   def edit
     driver = Driver.find_driver(params[:id])
-
-    render 'edit', locals: {driver: driver}
+    render_router driver
   end
 
   def show
     driver = Driver.find_driver(params[:id])
-
-    render 'show', locals: {driver: driver}
+    render_router driver
   end
 
   def create

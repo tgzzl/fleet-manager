@@ -3,7 +3,7 @@ class Driver < ActiveRecord::Base
   validates :name, presence: true
   validates :mobilephone, presence: true, format: {with: /\A1\d{10}\z/, message: "请输入正确的手机号码"}
 
-  def self.search(params)
+  def self.search(params={})
     result = {return_code: 0, return_info: 'success'}
 
     begin

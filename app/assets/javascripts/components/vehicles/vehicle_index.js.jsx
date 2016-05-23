@@ -1,7 +1,9 @@
+var Link = ReactRouter.Link;
+
 var VehicleIndex = React.createClass({
   getInitialState: function () {
     return {
-      vehicles: this.props.vehicles || [],
+      vehicles: this.props.data || [],
     }
   },
   deleteVehicle: function (fleetId, vehicleId) {
@@ -101,24 +103,25 @@ var VehicleList = React.createClass({
         <tbody>
         {this.props.data.map(function (item, i) {
           return (
-          <tr key={i}>
-            <th scope="row">{i + 1}</th>
-            <td>{item.number}</td>
-            <td>{item.fleet.name}</td>
-            <td>{item.fleet.contact}</td>
-            <td>{item.driver.name}</td>
-            <td>{item.driver.mobilephone}</td>
-            <td>
-              <a id={'link_vehicle_show_'+item.id} className="btn btn-default margin"
-                 href={'/vehicles/'+item.id}>查看</a>
-              <a id={'link_vehicle_edit_'+item.id} className="btn btn-default margin"
-                 href={'/vehicles/'+item.id+'/edit'}>修改</a>
-              <button id={'btn_vehicle_delete_'+item.id} className="btn btn-default"
-                      onClick={this.props.deleteVehicle.bind(null,item.fleet.id,item.id)}>删除
-              </button>
-            </td>
-          </tr>
-            )}, this)}
+            <tr key={i}>
+              <th scope="row">{i + 1}</th>
+              <td>{item.number}</td>
+              <td>{item.fleet.name}</td>
+              <td>{item.fleet.contact}</td>
+              <td>{item.driver.name}</td>
+              <td>{item.driver.mobilephone}</td>
+              <td>
+                <Link id={'link_vehicle_show_'+item.id} className="btn btn-default margin"
+                      to={'/vehicles/'+item.id}>查看</Link>
+                <Link id={'link_vehicle_edit_'+item.id} className="btn btn-default margin"
+                      to={'/vehicles/'+item.id+'/edit'}>修改</Link>
+                <button id={'btn_vehicle_delete_'+item.id} className="btn btn-default"
+                        onClick={this.props.deleteVehicle.bind(null,item.fleet.id,item.id)}>删除
+                </button>
+              </td>
+            </tr>
+          )
+        }, this)}
         </tbody>
       </table>
     );

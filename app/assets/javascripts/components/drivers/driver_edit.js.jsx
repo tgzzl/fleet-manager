@@ -1,8 +1,8 @@
 var DriverEdit = React.createClass({
   getInitialState: function () {
     return {
-      id: this.props.driver.id,
-      driver: this.props.driver,
+      driver: this.props.data,
+      id: this.props.data.id,
     }
   },
   saveDriver: function () {

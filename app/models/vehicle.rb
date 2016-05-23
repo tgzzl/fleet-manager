@@ -4,7 +4,7 @@ class Vehicle < ActiveRecord::Base
   validates :number, presence: true, uniqueness: true,
             format: {with: /\A[\u4e00-\u9fa5]{1}[a-zA-Z]{1}[a-zA-Z_0-9]{5}\z/, message: "请输入正确的车牌"}
 
-  def self.search(params)
+  def self.search(params={})
     result = {return_code: 0, return_info: 'success'}
 
     begin

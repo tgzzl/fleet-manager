@@ -1,16 +1,20 @@
+var Link = ReactRouter.Link;
+var RouteHandler = ReactRouter.RouteHandler;
+
 var Navigation = React.createClass({
   render: function () {
     return (
       <div>
         <h2 className="text-center">{this.props.title}</h2><br/><br/>
         <div className="col-sm-1">
-          <a id="link_fleets" href="/fleets">车队管理</a><br/>
-          <a id="link_fleet_new" href="/fleets/new">新建车队</a><br/><br/>
-          <a id="link_drivers" href="/drivers">司机管理</a><br/>
-          <a id="link_driver_new" href="/drivers/new">新建司机</a><br/><br/>
-          <a id="link_vehicles" href="/vehicles">车辆管理</a><br/>
-          <a id="link_vehicle_new" href="/vehicles/new">新建车辆</a>
+          <Link id="link_fleets" to="/fleets">车队管理</Link><br/>
+          <Link id="link_fleet_new" to="/fleets/new">新建车队</Link><br/><br/>
+          <Link id="link_drivers" to="/drivers">司机管理</Link><br/>
+          <Link id="link_driver_new" to="/drivers/new">新建司机</Link><br/><br/>
+          <Link id="link_vehicles" to="/vehicles">车辆管理</Link><br/>
+          <Link id="link_vehicle_new" to="/vehicles/new">新建车辆</Link>
         </div>
+        <RouteHandler {...this.props}/>
       </div>
     );
   }

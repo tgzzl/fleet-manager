@@ -1,7 +1,9 @@
+var Link = ReactRouter.Link;
+
 var DriverIndex = React.createClass({
   getInitialState: function () {
     return {
-      drivers: this.props.drivers || [],
+      drivers: this.props.data || [],
     }
   },
   deleteDriver: function (id) {
@@ -80,21 +82,22 @@ var DriverList = React.createClass({
         <tbody>
         {this.props.data.map(function (item, i) {
           return (
-          <tr key={i}>
-            <th scope="row">{i + 1}</th>
-            <td>{item.name}</td>
-            <td>{item.mobilephone}</td>
-            <td>
-              <a id={'link_driver_show_'+item.id} className="btn btn-default margin"
-                 href={'/drivers/'+item.id}>查看</a>
-              <a id={'link_driver_edit_'+item.id} className="btn btn-default margin"
-                 href={'/drivers/'+item.id+'/edit'}>修改</a>
-              <button id={'btn_driver_delete_'+item.id} className="btn btn-default"
-                      onClick={this.props.deleteDriver.bind(null,item.id)}>删除
-              </button>
-            </td>
-          </tr>
-            )}, this)}
+            <tr key={i}>
+              <th scope="row">{i + 1}</th>
+              <td>{item.name}</td>
+              <td>{item.mobilephone}</td>
+              <td>
+                <Link id={'link_driver_show_'+item.id} className="btn btn-default margin"
+                      to={'/drivers/'+item.id}>查看</Link>
+                <Link id={'link_driver_edit_'+item.id} className="btn btn-default margin"
+                      to={'/drivers/'+item.id+'/edit'}>修改</Link>
+                <button id={'btn_driver_delete_'+item.id} className="btn btn-default"
+                        onClick={this.props.deleteDriver.bind(null,item.id)}>删除
+                </button>
+              </td>
+            </tr>
+          )
+        }, this)}
         </tbody>
       </table>
     );

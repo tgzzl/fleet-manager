@@ -3,29 +3,29 @@ class VehiclesController < ApplicationController
     result = Vehicle.search(params)
 
     respond_to do |format|
-      format.html { render 'index', locals: {vehicles: result[:vehicles]} }
+      format.html { render_router result[:vehicles] }
       format.json { render json: result[:vehicles] }
     end
   end
 
   def new
-    fleets=Fleet.search({})
-    drivers=Driver.search({})
-
-    render 'new', locals: {fleets: fleets[:fleets], drivers: drivers[:drivers]}
+    fleets = Fleet.search
+    drivers = Driver.search
+    data = {fleets: fleets[:fleets], drivers: drivers[:drivers]}
+    render_router data
   end
 
   def edit
     vehicle = Vehicle.find_vehicle(params[:id])
-    fleets=Fleet.search({})
-    drivers=Driver.search({})
-
-    render 'edit', locals: {vehicle: vehicle, fleets: fleets[:fleets], drivers: drivers[:drivers]}
+    fleets = Fleet.search
+    drivers = Driver.search
+    data = {vehicle: vehicle, fleets: fleets[:fleets], drivers: drivers[:drivers]}
+    render_router data
   end
 
   def show
     vehicle = Vehicle.find_vehicle(params[:id])
-    render 'show', locals: {vehicle: Vehicle.as_json(vehicle)}
+    render_router Vehicle.as_json(vehicle)
   end
 
   def create

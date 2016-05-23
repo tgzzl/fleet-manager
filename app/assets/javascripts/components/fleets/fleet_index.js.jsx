@@ -1,7 +1,9 @@
+var Link = ReactRouter.Link;
+
 var FleetIndex = React.createClass({
   getInitialState: function () {
     return {
-      fleets: this.props.fleets || [],
+      fleets: this.props.data || [],
     }
   }, deleteFleet: function (id) {
     console.log('Destroy fleet:', id);
@@ -94,25 +96,25 @@ var FleetList = React.createClass({
         <tbody>
         {this.props.data.map(function (item, i) {
           return (
-          <tr key={i}>
-            <th scope="row">{i + 1}</th>
-            <td>{item.name}</td>
-            <td>{item.contact}</td>
-            <td>{item.mobilephone}</td>
-            <td>{item.telephone}</td>
-            <td>{item.address}</td>
-            <td>
-              <a id={'link_fleet_show_'+item.id} className="btn btn-default margin"
-                 href={'/fleets/'+item.id}>查看</a>
-              <a id={'link_fleet_edit_'+item.id} className="btn btn-default margin"
-                 href={'/fleets/'+item.id+'/edit'}>修改</a>
-              <button id={'btn_fleet_delete_'+item.id} className="btn btn-default"
-                      onClick={this.props.deleteFleet.bind(null,item.id)}>删除
-              </button>
-            </td>
-          </tr>
-            );
-          }, this)}
+            <tr key={i}>
+              <th scope="row">{i + 1}</th>
+              <td>{item.name}</td>
+              <td>{item.contact}</td>
+              <td>{item.mobilephone}</td>
+              <td>{item.telephone}</td>
+              <td>{item.address}</td>
+              <td>
+                <Link id={'link_fleet_show_'+item.id} className="btn btn-default margin"
+                      to={'/fleets/'+item.id}>查看</Link>
+                <Link id={'link_fleet_edit_'+item.id} className="btn btn-default margin"
+                      to={'/fleets/'+item.id+'/edit'}>修改</Link>
+                <button id={'btn_fleet_delete_'+item.id} className="btn btn-default"
+                        onClick={this.props.deleteFleet.bind(null,item.id)}>删除
+                </button>
+              </td>
+            </tr>
+          );
+        }, this)}
         </tbody>
       </table>
     );
