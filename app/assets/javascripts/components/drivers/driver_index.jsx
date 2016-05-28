@@ -1,9 +1,7 @@
-var Link = ReactRouter.Link;
-
 var DriverIndex = React.createClass({
   getInitialState: function () {
     return {
-      drivers: this.props.data || [],
+      drivers: this.props.route.data || [],
     }
   },
   deleteDriver: function (id) {

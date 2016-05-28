@@ -22,5 +22,13 @@ module FleetManager
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Browserify babelify (es6) and React
+    config.browserify_rails.commandline_options = '-t [ babelify --presets [es2015 react] ]'
+    config.react.addons = true
+    config.react.server_renderer_options = {
+        files: ['application-server.js'],
+        replay_console: true,
+    }
   end
 end

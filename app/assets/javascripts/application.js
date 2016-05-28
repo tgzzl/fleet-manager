@@ -13,10 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
+
 //= require react
 //= require react_ujs
-//= require react_router
-//= require react_router_ujs
+//= require react-router/umd/ReactRouter
 //= require_tree ./components
-//= require routes
+
 //= require_tree .

@@ -36,8 +36,8 @@ var VehicleNew = React.createClass({
         <Navigation title="新建车辆"/>
         <div className="col-sm-11">
           <VehicleForm data={this.state.vehicle}
-                       fleets={this.props.data.fleets}
-                       drivers={this.props.data.drivers}
+                       fleets={this.props.route.data.fleets}
+                       drivers={this.props.route.data.drivers}
                        setVehicle={this.setVehicle}
                        saveVehicle={this.saveVehicle}/>
         </div>

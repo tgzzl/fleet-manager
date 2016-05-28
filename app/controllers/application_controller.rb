@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def render_router data={}
+    p "======#{data.to_json}"
     render '/index', locals: {data: data}
   end
 end

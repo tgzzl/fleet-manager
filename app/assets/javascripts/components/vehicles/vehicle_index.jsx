@@ -1,9 +1,7 @@
-var Link = ReactRouter.Link;
-
 var VehicleIndex = React.createClass({
   getInitialState: function () {
     return {
-      vehicles: this.props.data || [],
+      vehicles: this.props.route.data || [],
     }
   },
   deleteVehicle: function (fleetId, vehicleId) {

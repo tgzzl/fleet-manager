@@ -1,8 +1,8 @@
 var VehicleEdit = React.createClass({
   getInitialState: function () {
     return {
-      vehicle: this.props.data,
-      id: this.props.data.id,
+      vehicle: this.props.route.data,
+      id: this.props.route.data.id,
     }
   },
   saveVehicle: function () {
@@ -38,8 +38,8 @@ var VehicleEdit = React.createClass({
         <Navigation title="编辑车辆"/>
         <div className="col-sm-11">
           <VehicleForm data={this.state.vehicle}
-                       fleets={this.props.data.fleets}
-                       drivers={this.props.data.drivers}
+                       fleets={this.props.route.data.fleets}
+                       drivers={this.props.route.data.drivers}
                        setVehicle={this.setVehicle}
                        saveVehicle={this.saveVehicle}/>
         </div>

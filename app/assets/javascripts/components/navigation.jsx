@@ -1,6 +1,3 @@
-var Link = ReactRouter.Link;
-var RouteHandler = ReactRouter.RouteHandler;
-
 var Navigation = React.createClass({
   render: function () {
     return (
@@ -14,7 +11,6 @@ var Navigation = React.createClass({
           <Link id="link_vehicles" to="/vehicles">车辆管理</Link><br/>
           <Link id="link_vehicle_new" to="/vehicles/new">新建车辆</Link>
         </div>
-        <RouteHandler {...this.props}/>
       </div>
     );
   }
