@@ -1,11 +1,10 @@
 class FleetsController < ApplicationController
+  before_action :enter_action_log
+  after_action :out_action_log
+
   def index
     result = Fleet.search(params)
-
-    respond_to do |format|
-      format.html { render_router result[:fleets] }
-      format.json { render json: result[:fleets] }
-    end
+    render_router result[:fleets]
   end
 
   def new

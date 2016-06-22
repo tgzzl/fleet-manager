@@ -1,17 +1,43 @@
+import React from 'react';
+
 var FleetShow = React.createClass({
+  getDefaultProps: function () {
+    return {
+      title: '车队详情'
+    };
+  },
+  getInitialState: function () {
+    return {
+      fleet:{},
+      vehicles:[],
+    }
+  },
+  componentDidMount: function() {
+    this.fetchData();
+  },
+  fetchData:function(){
+    $.ajax({
+      url: '/fleets/' + this.props.params.id,
+      method: 'GET',
+      dataType: 'JSON',
+      success: function (data) {
+        this.setState({fleet:data.fleet,vehicles:data.vehicles});
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function () {
     return (
-      <div className="panel-body">
-        <Navigation title="车队详情"/>
-        <div className="col-sm-11">
-          <p>名称：{this.props.data.fleet.name}</p>
-          <p>联系人：{this.props.data.fleet.contact}</p>
-          <p>手机：{this.props.data.fleet.mobilephone}</p>
-          <p>电话：{this.props.data.fleet.telephone}</p>
-          <p>车队驻地：{this.props.data.fleet.address}</p>
-          <FleetVehicleList data={this.props.data.vehicles}/>
+        <div>
+          <p>名称：{this.state.fleet.name}</p>
+          <p>联系人：{this.state.fleet.contact}</p>
+          <p>手机：{this.state.fleet.mobilephone}</p>
+          <p>电话：{this.state.fleet.telephone}</p>
+          <p>车队驻地：{this.state.fleet.address}</p>
+          <FleetVehicleList data={this.state.vehicles}/>
         </div>
-      </div>
     );
   }
 });
@@ -50,3 +76,5 @@ var FleetVehicleList = React.createClass({
     );
   }
 });
+
+export default FleetShow;

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const MATCH_MOBILEPHONE = /^1\d{10}$/;
 
 var DriverForm = React.createClass({
@@ -14,7 +16,7 @@ var DriverForm = React.createClass({
   },
   handleSubmit: function () {
     if (!MATCH_MOBILEPHONE.test(this.props.data.mobilephone)) {
-      this.refs.ref_driver_mobilephone.getDOMNode().focus();
+      this.refs.ref_driver_mobilephone.focus();
       var data = this.props.data;
       data.mobilephone = '';
       this.props.setDriver(data);
@@ -50,3 +52,5 @@ var DriverForm = React.createClass({
     );
   }
 });
+
+export default DriverForm;

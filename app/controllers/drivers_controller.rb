@@ -1,11 +1,10 @@
 class DriversController < ApplicationController
+  before_action :enter_action_log
+  after_action :out_action_log
+
   def index
     result = Driver.search(params)
-
-    respond_to do |format|
-      format.html { render_router result[:drivers] }
-      format.json { render json: result[:drivers] }
-    end
+    render_router result[:drivers]
   end
 
   def new

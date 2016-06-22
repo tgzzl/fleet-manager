@@ -1,27 +1,21 @@
-var Link = ReactRouter.Link;
+import React from 'react';
+import { Link } from 'react-router';
 
 var VehicleIndex = React.createClass({
+  getDefaultProps: function () {
+    return {
+      title: '车辆管理'
+    };
+  },
   getInitialState: function () {
     return {
-      vehicles: this.props.data || [],
+      vehicles: [],
     }
   },
-  deleteVehicle: function (fleetId, vehicleId) {
-    console.log('Destroy vehicle:', fleetId, vehicleId);
-    $.ajax({
-      url: '/vehicles/' + vehicleId,
-      method: 'DELETE',
-      dataType: 'JSON',
-      data: {id: vehicleId},
-      success: function (vehicles) {
-        this.setState({vehicles: vehicles});
-      }.bind(this),
-      error: function (xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+  componentDidMount: function() {
+    this.fetchData();
   },
-  searchVehicle: function () {
+  fetchData: function () {
     var param = {
       number: this.refs.ref_search_vehicle_number.value,
       fleet_name: this.refs.ref_search_fleet_name.value,
@@ -29,7 +23,6 @@ var VehicleIndex = React.createClass({
       driver_name: this.refs.ref_search_driver_name.value,
       driver_mobilephone: this.refs.ref_search_driver_mobilephone.value,
     };
-    console.log('Search vehicle:', param);
     $.ajax({
       url: '/vehicles',
       method: 'GET',
@@ -43,11 +36,23 @@ var VehicleIndex = React.createClass({
       }.bind(this)
     });
   },
+  deleteVehicle: function (fleetId, vehicleId) {
+    $.ajax({
+      url: '/vehicles/' + vehicleId,
+      method: 'DELETE',
+      dataType: 'JSON',
+      data: {id: vehicleId},
+      success: function (vehicles) {
+        this.setState({vehicles: vehicles});
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function () {
     return (
-      <div className="app panel-body">
-        <Navigation title="车辆管理"/>
-        <div className="col-sm-11">
+        <div>
           <div className="form-inline" style={{marginBottom:'10px'}}>
             <div className="form-group margin">
               <label className="sr-only">车牌:</label>
@@ -74,13 +79,12 @@ var VehicleIndex = React.createClass({
               <input type="text" className="form-control" placeholder="司机手机"
                      id="vehicle_form_driver_mobilephone" ref="ref_search_driver_mobilephone"/>
             </div>
-            <button type="button" className="btn btn-default margin" onClick={this.searchVehicle}
+            <button type="button" className="btn btn-default margin" onClick={this.fetchData}
                     id="vehicle_form_submit">搜索
             </button>
           </div>
           <VehicleList data={this.state.vehicles} deleteVehicle={this.deleteVehicle}/>
         </div>
-      </div>
     );
   }
 });
@@ -127,3 +131,5 @@ var VehicleList = React.createClass({
     );
   }
 });
+
+export default VehicleIndex;

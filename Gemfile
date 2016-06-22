@@ -25,8 +25,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass', '3.3.3'
-gem 'react-rails', '~> 1.4.0'
-gem 'react-router-rails', '~>0.13.3.2'
+gem 'webpack-rails-react'
+gem 'foreman'
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -52,6 +54,3 @@ group :development, :test do
   gem 'phantomjs', '1.9.8.0', :require => 'phantomjs/poltergeist'
   gem 'database_cleaner', '1.4.1'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

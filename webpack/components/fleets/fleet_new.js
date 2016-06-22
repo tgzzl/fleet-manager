@@ -1,18 +1,23 @@
-var FleetEdit = React.createClass({
+import React from 'react';
+import FleetForm from './fleet_form';
+
+var FleetNew = React.createClass({
+  getDefaultProps: function () {
+    return {
+      title: '新建车队'
+    };
+  },
   getInitialState: function () {
     return {
-      fleet: this.props.data,
-      id: this.props.data.id,
+      fleet: {},
     }
   },
   saveFleet: function () {
-    console.log('Update fleet:', this.state.fleet);
     $.ajax({
-      url: '/fleets/' + this.state.id,
-      method: 'PUT',
-      data: {id: this.state.id, fleet: this.state.fleet},
+      url: '/fleets',
+      method: 'POST',
+      data: {fleet: this.state.fleet},
       success: function (data) {
-        console.log('Update fleet result:', JSON.stringify(data));
         if (data.return_code == 0) {
           window.location.href = '/fleets';
         } else {
@@ -29,12 +34,9 @@ var FleetEdit = React.createClass({
   },
   render: function () {
     return (
-      <div className="panel-body">
-        <Navigation title="编辑车队"/>
-        <div className="col-sm-11">
           <FleetForm data={this.state.fleet} setFleet={this.setFleet} saveFleet={this.saveFleet}/>
-        </div>
-      </div>
     );
   }
 });
+
+export default FleetNew;

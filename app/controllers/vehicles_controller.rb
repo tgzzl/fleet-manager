@@ -1,11 +1,10 @@
 class VehiclesController < ApplicationController
+  before_action :enter_action_log
+  after_action :out_action_log
+
   def index
     result = Vehicle.search(params)
-
-    respond_to do |format|
-      format.html { render_router result[:vehicles] }
-      format.json { render json: result[:vehicles] }
-    end
+    render_router result[:vehicles]
   end
 
   def new
@@ -25,7 +24,8 @@ class VehiclesController < ApplicationController
 
   def show
     vehicle = Vehicle.find_vehicle(params[:id])
-    render_router Vehicle.as_json(vehicle)
+    vehicle = Vehicle.as_json(vehicle)
+    render_router vehicle
   end
 
   def create

@@ -1,13 +1,39 @@
-var Link = ReactRouter.Link;
+import React from 'react';
+import { Link } from 'react-router';
 
 var DriverIndex = React.createClass({
+  getDefaultProps: function () {
+    return {
+      title: '司机管理'
+    };
+  },
   getInitialState: function () {
     return {
-      drivers: this.props.data || [],
+      drivers: [],
     }
   },
+  componentDidMount: function() {
+    this.fetchData();
+  },
+  fetchData: function () {
+    var param = {
+      name: this.refs.ref_search_driver_name.value,
+      mobilephone: this.refs.ref_search_driver_mobilephone.value,
+    };
+    $.ajax({
+      url: '/drivers',
+      method: 'GET',
+      dataType: 'JSON',
+      data: param,
+      success: function (data) {
+        this.setState({drivers: data});
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   deleteDriver: function (id) {
-    console.log('Destroy driver:', id);
     $.ajax({
       url: '/drivers/' + id,
       method: 'DELETE',
@@ -21,30 +47,9 @@ var DriverIndex = React.createClass({
       }.bind(this)
     });
   },
-  searchDriver: function () {
-    var param = {
-      name: this.refs.ref_search_driver_name.value,
-      mobilephone: this.refs.ref_search_driver_mobilephone.value,
-    };
-    console.log('Search driver:', param);
-    $.ajax({
-      url: '/drivers',
-      method: 'GET',
-      dataType: 'JSON',
-      data: param,
-      success: function (drivers) {
-        this.setState({drivers: drivers});
-      }.bind(this),
-      error: function (xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
   render: function () {
     return (
-      <div className="app panel-body">
-        <Navigation title="司机管理"/>
-        <div className="col-sm-11">
+        <div>
           <div className="form-inline" style={{marginBottom:'10px'}}>
             <div className="form-group margin">
               <label className="sr-only">名称:</label>
@@ -56,13 +61,12 @@ var DriverIndex = React.createClass({
               <input type="text" className="form-control" placeholder="手机"
                      id="driver_form_mobilephone" ref="ref_search_driver_mobilephone"/>
             </div>
-            <button type="button" className="btn btn-default margin" onClick={this.searchDriver}
+            <button type="button" className="btn btn-default margin" onClick={this.fetchData}
                     id="driver_form_submit">搜索
             </button>
           </div>
           <DriverList data={this.state.drivers} deleteDriver={this.deleteDriver}/>
         </div>
-      </div>
     );
   }
 });
@@ -103,3 +107,5 @@ var DriverList = React.createClass({
     );
   }
 });
+
+export default DriverIndex;

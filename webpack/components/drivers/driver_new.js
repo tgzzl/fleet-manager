@@ -1,18 +1,23 @@
-var DriverEdit = React.createClass({
+import React from 'react';
+import DriverForm from './driver_form';
+
+var DriverNew = React.createClass({
+  getDefaultProps: function () {
+    return {
+      title: '新建司机'
+    };
+  },
   getInitialState: function () {
     return {
-      driver: this.props.data,
-      id: this.props.data.id,
+      driver: {},
     }
   },
   saveDriver: function () {
-    console.log('Update driver:', this.state.driver);
     $.ajax({
-      url: '/drivers/' + this.state.id,
-      method: 'PUT',
-      data: {id: this.state.id, driver: this.state.driver},
+      url: '/drivers',
+      method: 'POST',
+      data: {driver: this.state.driver},
       success: function (data) {
-        console.log('Update driver result:', JSON.stringify(data));
         if (data.return_code == 0) {
           window.location.href = '/drivers';
         } else {
@@ -29,12 +34,9 @@ var DriverEdit = React.createClass({
   },
   render: function () {
     return (
-      <div className="panel-body">
-        <Navigation title="编辑司机"/>
-        <div className="col-sm-11">
           <DriverForm data={this.state.driver} setDriver={this.setDriver} saveDriver={this.saveDriver}/>
-        </div>
-      </div>
     );
   }
 });
+
+export default DriverNew;

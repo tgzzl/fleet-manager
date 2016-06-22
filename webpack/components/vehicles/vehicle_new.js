@@ -1,23 +1,45 @@
-var VehicleEdit = React.createClass({
+import React from 'react';
+import VehicleForm from './vehicle_form';
+
+var VehicleNew = React.createClass({
+  getDefaultProps: function () {
+    return {
+      title: '新建车辆'
+    };
+  },
   getInitialState: function () {
     return {
-      vehicle: this.props.data,
-      id: this.props.data.id,
+      vehicle: {},
+      fleets:[],
+      drivers:[],
     }
   },
-  saveVehicle: function () {
-    console.log('Update vehicle:', this.state.vehicle);
+  componentDidMount: function() {
+    this.fetchData();
+  },
+  fetchData:function(){
     $.ajax({
-      url: '/vehicles/' + this.state.id,
-      method: 'PUT',
+      url: '/vehicles/new',
+      method: 'GET',
+      dataType: 'JSON',
+      success: function (data) {
+        this.setState({fleets:data.fleets,drivers:data.drivers});
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  saveVehicle: function () {
+    $.ajax({
+      url: '/vehicles',
+      method: 'POST',
       data: {
-        id: this.state.id,
         fleet_id: this.state.vehicle.fleet_id,
         driver_id: this.state.vehicle.driver_id,
         vehicle: this.state.vehicle
       },
       success: function (data) {
-        console.log('Update vehicle result:', JSON.stringify(data));
         if (data.return_code == 0) {
           window.location.href = '/vehicles';
         } else {
@@ -34,16 +56,13 @@ var VehicleEdit = React.createClass({
   },
   render: function () {
     return (
-      <div className="panel-body">
-        <Navigation title="编辑车辆"/>
-        <div className="col-sm-11">
           <VehicleForm data={this.state.vehicle}
-                       fleets={this.props.data.fleets}
-                       drivers={this.props.data.drivers}
+                       fleets={this.state.fleets}
+                       drivers={this.state.drivers}
                        setVehicle={this.setVehicle}
                        saveVehicle={this.saveVehicle}/>
-        </div>
-      </div>
     );
   }
 });
+
+export default VehicleNew;

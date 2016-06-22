@@ -1,3 +1,5 @@
+import React from 'react';
+
 const MATCH_VEHICLE_NUMBER = /^[\u4e00-\u9fa5]{1}[a-zA-Z]{1}[a-zA-Z_0-9]{5}$/;
 
 var VehicleForm = React.createClass({
@@ -15,7 +17,7 @@ var VehicleForm = React.createClass({
   },
   handleSubmit: function () {
     if (!MATCH_VEHICLE_NUMBER.test(this.props.data.number)) {
-      this.refs.ref_vehicle_number.getDOMNode().focus();
+      this.refs.ref_vehicle_number.focus();
       var data = this.props.data;
       data.number = '';
       this.props.setVehicle(data);
@@ -70,3 +72,5 @@ var VehicleForm = React.createClass({
     );
   }
 });
+
+export default VehicleForm;

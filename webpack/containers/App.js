@@ -1,11 +1,16 @@
-var Link = ReactRouter.Link;
-var RouteHandler = ReactRouter.RouteHandler;
+import React from 'react';
+import { Link } from 'react-router';
 
-var Navigation = React.createClass({
+var App = React.createClass({
+  getInitialState: function () {
+    return {
+      title:'车队管理系统',
+    }
+  },
   render: function () {
     return (
-      <div>
-        <h2 className="text-center">{this.props.title}</h2><br/><br/>
+      <div className="app panel-body">
+        <h2 className="text-center">{this.props.children.props.title}</h2><br/><br/>
         <div className="col-sm-1">
           <Link id="link_fleets" to="/fleets">车队管理</Link><br/>
           <Link id="link_fleet_new" to="/fleets/new">新建车队</Link><br/><br/>
@@ -14,8 +19,13 @@ var Navigation = React.createClass({
           <Link id="link_vehicles" to="/vehicles">车辆管理</Link><br/>
           <Link id="link_vehicle_new" to="/vehicles/new">新建车辆</Link>
         </div>
-        <RouteHandler {...this.props}/>
+        <div className="col-sm-11">
+          { this.props.children }
+        </div>
       </div>
     );
   }
 });
+
+export default App;
+

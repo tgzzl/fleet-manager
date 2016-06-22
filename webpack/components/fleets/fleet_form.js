@@ -1,3 +1,5 @@
+import React from 'react';
+
 const MATCH_MOBILEPHONE = /^1\d{10}$/;
 const MATCH_TELEPHONE = /^[0-9]+$/;
 
@@ -18,7 +20,7 @@ var FleetForm = React.createClass({
   },
   handleSubmit: function () {
     if (!MATCH_MOBILEPHONE.test(this.props.data.mobilephone)) {
-      this.refs.ref_fleet_mobilephone.getDOMNode().focus();
+      this.refs.ref_fleet_mobilephone.focus();
       var data = this.props.data;
       data.mobilephone = '';
       this.props.setFleet(data);
@@ -26,7 +28,7 @@ var FleetForm = React.createClass({
       return;
     }
     if (!MATCH_TELEPHONE.test(this.props.data.telephone)) {
-      this.refs.ref_fleet_telephone.getDOMNode().focus();
+      this.refs.ref_fleet_telephone.focus();
       var data = this.props.data;
       data.telephone = '';
       this.props.setFleet(data);
@@ -83,3 +85,5 @@ var FleetForm = React.createClass({
     );
   }
 });
+
+export default FleetForm;
