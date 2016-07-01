@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { getFleets } from '../actions';
 
 var App = React.createClass({
-  getInitialState: function () {
-    return {
-      title:'车队管理系统',
-    }
+  componentWillMount() {
+    this.props.dispatch(getFleets());
   },
   render: function () {
     return (
@@ -27,5 +27,4 @@ var App = React.createClass({
   }
 });
 
-export default App;
-
+export default connect()(App);
